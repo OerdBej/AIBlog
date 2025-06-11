@@ -1,8 +1,11 @@
+import StoriesList from "../StoriesList";
+import stories from "../data/content";
+
 const StoryListPage = () => {
   return (
-    <div>
-      <h2>This is the story list page</h2>
-    </div>
+    <>
+      <StoriesList stories={stories} />
+    </>
   );
 };
 
