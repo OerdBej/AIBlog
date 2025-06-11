@@ -8,7 +8,6 @@ const books = [
       "Filled with real-life examples, from athletes to business leaders, the book inspires readers to embrace incremental progress. By focusing on 1% improvements, Clear shows how anyone can achieve lasting transformation, one small step at a time.",
     ],
   },
-
   {
     name: "Power-of-now",
     title: "The Power of Now",
@@ -18,7 +17,6 @@ const books = [
       "The book’s transformative message resonates globally, offering readers a path to freedom from psychological pain. By embracing the 'now,' Tolle suggests we can find true joy and fulfillment, regardless of external circumstances.",
     ],
   },
-
   {
     name: "Thinking-fast-and-slow",
     title: "Thinking, Fast and Slow",
@@ -28,7 +26,6 @@ const books = [
       "With engaging anecdotes and experiments, the book challenges readers to rethink how they approach choices. It’s a profound guide to understanding human behavior and making better decisions in an uncertain world.",
     ],
   },
-
   {
     name: "Seven-habits",
     title: "The 7 Habits of Highly Effective People",
@@ -38,7 +35,6 @@ const books = [
       "With its focus on character development and practical application, Covey’s work has inspired millions. It’s a roadmap for aligning actions with values, empowering readers to lead more effective and fulfilling lives.",
     ],
   },
-
   {
     name: "Mindset",
     title: "Mindset: The New Psychology of Success",
@@ -46,6 +42,15 @@ const books = [
       "Carol S. Dweck’s *Mindset* introduces the concept of fixed and growth mindsets, showing how our beliefs about our abilities shape our potential. Dweck argues that a growth mindset—embracing challenges and learning from failure—leads to greater success.",
       "Through research and stories, the book illustrates how mindset impacts education, business, relationships, and personal development. Dweck offers strategies to cultivate a growth mindset, such as reframing setbacks as opportunities for growth.",
       "Inspiring and practical, *Mindset* encourages readers to rethink their approach to challenges. By fostering resilience and a love for learning, Dweck’s insights help unlock limitless possibilities for achievement.",
+    ],
+  },
+  {
+    name: "Switch",
+    title: "Switch: How to Change Things When Change Is Hard",
+    content: [
+      "Chip and Dan Heath’s *Switch* provides a practical framework for creating lasting change in personal and professional contexts. The authors use a compelling metaphor of a Rider (rational mind), an Elephant (emotional drive), and a Path (environment) to explain the dynamics of change.",
+      "The book offers strategies to align these elements: direct the Rider with clear goals, motivate the Elephant by tapping into emotions, and shape the Path by simplifying the environment. These steps make change more achievable, even when resistance is strong.",
+      "With engaging stories and actionable advice, *Switch* equips readers to tackle tough changes. From personal habits to organizational shifts, the Heath brothers show how small tweaks can lead to big transformations.",
     ],
   },
 ];
