@@ -2,9 +2,15 @@
 
 @layer base {
   body {
-    @apply bg-[#0B192C];
+    @apply bg-[#309898];
+    @apply text-white;
   }
   button {
     @apply cursor-pointer;
+  }
+
+  /* Retro vibe styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
   }
 }

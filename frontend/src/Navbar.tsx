@@ -2,8 +2,8 @@ import { Link } from "react-router";
 
 export default function NavBar() {
   return (
-    <nav className="bg-[#F85525] px-4 py-8 w-full 2xl:rounded-b">
-      <ul className="flex justify-between flex-wrap text-white font-bold sm:justify-center sm:gap-x-16 *:text-x1 gap-x-8 gap-y-4">
+    <nav className="px-4 py-8 bg-[#FF6500] 2xl:rounded-b w-full">
+      <ul className="flex justify-between flex-wrap gap-x-8 gap-y-4 text-white font-bold sm:justify-center sm:gap-x-16 *:text-xl">
         <li>
           <Link to="/">Home</Link>
         </li>
