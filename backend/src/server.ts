@@ -27,9 +27,10 @@ const stories: Story[] = [
 let db: Db;
 let dbcollection: Collection<Story>;
 
-//port of adress
+//await since might take time
 async function dbConnection() {
   const uri = "mongodb://127.0.0.1:27017";
+  //mongoclient go to db and connect to it by the uri than create a db, need some rules to connect to it the first serverApi
   const client = new MongoClient(uri, {
     serverApi: {
       version: ServerApiVersion.v1,
@@ -38,6 +39,7 @@ async function dbConnection() {
     },
   });
 
+  //connect to the instance of the db
   await client.connect();
   db = client.db("mern-journal");
 
@@ -45,22 +47,23 @@ async function dbConnection() {
   dbcollection = db.collection("stories");
 }
 
-app.get("/stories/:name", (req: Request, res: Response) => {
-  const { name } = req.params;
-  res.send(`You Cliked on ${name}`);
+app.get("/api/stories/:name", async (req: Request, res: Response) => {
+const { name } = req.params;
+const story = await dbcollection.findOne({name: name})
+res.json(story)
 });
 
 //likes increase
-app.post("/api/stories/:name/like", (req: Request, res: Response) => {
-  // if the user has send the req is the same with the one in server
-  const story = stories.find((story) => story.name === req.params.name);
-  story!.likes += 1;
-  res.send(`Story ${req.params.name} has totally ${story!.likes}`);
+app.post("/api/stories/:name/like", async (req: Request, res: Response) => {
+  const {name } = req.params;
+  // method by mongodb and the returnDocument is for getting the updated document after the update
+const stories = await dbcollection.findOneAndUpdate({name: name}, {$inc: {likes: 1}}, {returnDocument: "after"})
+res.json(stories)
 });
 
 // comments increase
 app.post("/api/stories/:name/comments", (req: Request, res: Response) => {
-  const { writtenBy, content } = req.body; //json confg bcs we send objt
+  const { writtenBy, content } = req.body;
   const story = stories.find((story) => story.name === req.params.name);
   // comments is an array and we add obj so we can know how wrote/and content
   story!.comments.push({
