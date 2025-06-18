@@ -1,10 +1,15 @@
-import { useParams } from "react-router";
+import { useLoaderData, useParams } from "react-router";
 import stories from "../data/content";
+
+interface Story {
+  likes: number;
+  comments: { writtenBy: string; content: string }[];
+}
 
 export default function StoryPage() {
   const { name } = useParams();
+  const { likes, comments }: Story = useLoaderData();
 
-  // non null assertion
   const story = stories.find((story) => story.name === name)!;
 
   return (
@@ -19,6 +24,7 @@ export default function StoryPage() {
           </p>
         ))}
       </section>
+      <p className="text-3xl bg-red-700"> {likes}</p>
     </>
   );
 }

@@ -4,6 +4,7 @@ import NotFound from "./pages/NotFound";
 import HomePage from "./pages/HomePage";
 import StoryListPage from "./pages/StoryListPage";
 import StoryPage from "./pages/StoryPage";
+import { storyLoader } from "./loaders/storyLoader";
 
 const routes = [
   {
@@ -22,6 +23,8 @@ const routes = [
       {
         path: "/stories/:name",
         element: <StoryPage />,
+
+        loader: storyLoader,
       },
     ],
   },
