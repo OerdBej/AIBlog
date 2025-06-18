@@ -1,5 +1,11 @@
 import express, { Express, Request, Response } from "express";
-import { Collection, Db, MongoClient, ServerApiVersion } from "mongodb";
+import {
+  Collection,
+  Db,
+  MongoClient,
+  ReturnDocument,
+  ServerApiVersion,
+} from "mongodb";
 
 const app: Express = express();
 app.use(express.json()); //user sended a obj so we handle it
@@ -48,38 +54,46 @@ async function dbConnection() {
 }
 
 app.get("/api/stories/:name", async (req: Request, res: Response) => {
-const { name } = req.params;
-const story = await dbcollection.findOne({name: name})
-res.json(story)
-});
-
-//likes increase
-app.post("/api/stories/:name/like", async (req: Request, res: Response) => {
-  const {name } = req.params;
-  // method by mongodb and the returnDocument is for getting the updated document after the update
-const stories = await dbcollection.findOneAndUpdate({name: name}, {$inc: {likes: 1}}, {returnDocument: "after"})
-res.json(stories)
-});
-
-// comments increase
-app.post("/api/stories/:name/comments", (req: Request, res: Response) => {
-  const { writtenBy, content } = req.body;
-  const story = stories.find((story) => story.name === req.params.name);
-  // comments is an array and we add obj so we can know how wrote/and content
-  story!.comments.push({
-    writtenBy,
-    content,
-  });
-  //sending a json req back to user - parse to JS obje to get out data
+  const { name } = req.params;
+  const story = await dbcollection.findOne({ name: name });
   res.json(story);
 });
 
-// Connect to MongoDB before starting the server
-dbConnection().then(() => {
-  app.listen(3000, () => {
-    console.log("Server is up BRO");
-    console.log("MongoDB connection established");
-  });
-}).catch(err => {
-  console.error("Failed to connect to MongoDB:", err);
+//likes increase based on stories match
+app.post("/api/stories/:name/likes", async (req: Request, res: Response) => {
+  const { name } = req.params;
+  // method by mongodb and the returnDocument is for getting the updated document after the update
+  const stories = await dbcollection.findOneAndUpdate(
+    { name: name },
+    { $inc: { likes: 1 } },
+    { returnDocument: "after" }
+  );
+  res.json(stories);
 });
+
+// comments increase
+app.post("/api/stories/:name/comments", async (req: Request, res: Response) => {
+  const { name } = req.params;
+  const { writtenBy, content } = req.body;
+  const newComment = { writtenBy, content };
+
+  const updatedStory = await dbcollection.findOneAndUpdate(
+    { name },
+    { $push: { comments: newComment } },
+    { returnDocument: "after" }
+  );
+
+  res.json(updatedStory);
+});
+
+// Connect to MongoDB before starting the server
+dbConnection()
+  .then(() => {
+    app.listen(3000, () => {
+      console.log("Server is up BRO");
+      console.log("MongoDB connection established");
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB:", err);
+  });
