@@ -1,5 +1,7 @@
 import { useLoaderData, useParams } from "react-router";
 import stories from "../data/content";
+import axios from "axios";
+import { useState } from "react";
 
 interface Story {
   likes: number;
@@ -8,9 +10,18 @@ interface Story {
 
 export default function StoryPage() {
   const { name } = useParams();
-  const { likes, comments }: Story = useLoaderData();
+  const { likes: firstLikes, comments }: Story = useLoaderData();
+
+  const [likes, setLikes] = useState(firstLikes);
 
   const story = stories.find((story) => story.name === name)!;
+
+  //req to server
+  async function likeStory() {
+    const response = await axios.post(`/api/stories/${name}/likes`);
+    const updatedData = response.data;
+    setLikes(updatedData.likes);
+  }
 
   return (
     <>
@@ -24,7 +35,15 @@ export default function StoryPage() {
           </p>
         ))}
       </section>
-      <p className="text-3xl bg-red-700"> {likes}</p>
+      <p className="text-left text-[#FF6599]">
+        {likes} {likes === 1 ? "Like" : "Likes"}
+      </p>
+      <button
+        className="text-white border border-[#FF6599 px-4 py-2 rounded]"
+        onClick={likeStory}
+      >
+        Like Story
+      </button>
     </>
   );
 }
