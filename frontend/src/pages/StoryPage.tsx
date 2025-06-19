@@ -28,6 +28,7 @@ export default function StoryPage() {
       <h1 className="text-center text-white text-3xl font-bold">
         {story.title}
       </h1>
+
       <section className="flex flex-col gap-3 lg:max-w-3xl lg:max-auto text-white">
         {story.content.map((item) => (
           <p className="text-xl" key={item}>
@@ -35,15 +36,17 @@ export default function StoryPage() {
           </p>
         ))}
       </section>
-      <p className="text-left text-[#FF6599]">
-        {likes} {likes === 1 ? "Like" : "Likes"}
-      </p>
-      <button
-        className="text-white border border-[#FF6599 px-4 py-2 rounded]"
-        onClick={likeStory}
-      >
-        Like Story
-      </button>
+      <section className="space-y-6 self-center w-full text-white lg:max-w-3xl">
+        <p className="text-left text-[#FF6599]">
+          {likes} {likes === 1 ? "Like" : "Likes"}
+        </p>
+        <button
+          className="text-white border border-[#FF6599 px-4 py-2 rounded]"
+          onClick={likeStory}
+        >
+          Like Story
+        </button>
+      </section>
     </>
   );
 }
