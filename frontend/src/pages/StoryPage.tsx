@@ -2,6 +2,7 @@ import { useLoaderData, useParams } from "react-router";
 import stories from "../data/content";
 import axios from "axios";
 import { useState } from "react";
+import StoryComments from "../StoryComments";
 
 interface Story {
   likes: number;
@@ -10,6 +11,7 @@ interface Story {
 
 export default function StoryPage() {
   const { name } = useParams();
+  // 🔴 loader hook from react router
   const { likes: firstLikes, comments }: Story = useLoaderData();
 
   const [likes, setLikes] = useState(firstLikes);
@@ -47,6 +49,7 @@ export default function StoryPage() {
           Like Story
         </button>
       </section>
+      <StoryComments comments={comments} />
     </>
   );
 }
