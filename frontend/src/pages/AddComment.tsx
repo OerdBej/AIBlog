@@ -43,6 +43,27 @@ export default function AddComment({ commentStory }: CommentStoryProp) {
             required
           />
         </label>
+        <label
+          className="flex flex-col text-xl gap-2 focus-within:text-[#FF6500] focus-within:font-bold mb-8"
+          htmlFor="comment"
+        >
+          Comment
+          <input
+            className="border-b border-gray-300 focus:border-[#bc9c41] outline-none"
+            type="text"
+            id="comment"
+            value={contentText}
+            onChange={(e) => setContentText(e.target.value)}
+            required
+          />
+        </label>
+        {/* click for button */}
+        <button
+          className="text-white bg-amber-600 px-4 py-3 rounded text-xl"
+          type="submit"
+        >
+          Add Comment Bro
+        </button>
       </form>
     </>
   );
