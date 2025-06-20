@@ -25,12 +25,12 @@ export default function AddComment({ commentStory }: CommentStoryProp) {
   return (
     <>
       <form
-        className="flex flex-col gap-8 self-center w-full text-white lg:max-w-3xl my-8"
+        className="flex flex-col self-center w-full text-white lg:max-w-3xl my-8 gap-7"
         onSubmit={handleCommenting}
       >
         <h3 className="text-2xl font-bold mb-4">here comment</h3>
         <label
-          className="flex flex-col text-xl gap-2 focus-within:text-[#FF6500] focus-within:font-bold mb-8"
+          className="flex flex-col text-xl gap-2 focus-within:text-[#FF6500] focus-within:font-bold  "
           htmlFor="name"
         >
           Name
@@ -44,7 +44,7 @@ export default function AddComment({ commentStory }: CommentStoryProp) {
           />
         </label>
         <label
-          className="flex flex-col text-xl gap-2 focus-within:text-[#FF6500] focus-within:font-bold mb-8"
+          className="flex flex-col text-xl gap-2 focus-within:text-[#FF6500] focus-within:font-bold  "
           htmlFor="comment"
         >
           Comment
