@@ -3,6 +3,7 @@ import stories from "../data/content";
 import axios from "axios";
 import { useState } from "react";
 import StoryComments from "../StoryComments";
+import AddComment from "./AddComment";
 
 interface Story {
   likes: number;
@@ -12,9 +13,11 @@ interface Story {
 export default function StoryPage() {
   const { name } = useParams();
   // 🔴 loader hook from react router
-  const { likes: firstLikes, comments }: Story = useLoaderData();
+  const { likes: firstLikes, comments: initialComments }: Story =
+    useLoaderData();
 
   const [likes, setLikes] = useState(firstLikes);
+  const [comments, setComments] = useState(initialComments);
 
   const story = stories.find((story) => story.name === name)!;
 
@@ -25,6 +28,20 @@ export default function StoryPage() {
     setLikes(updatedData.likes);
   }
 
+  async function commentStory({
+    nameText,
+    contentText,
+  }: {
+    nameText: string;
+    contentText: string;
+  }) {
+    const response = await axios.post(`/api/stories/${name}/comments`, {
+      writtenBy: nameText,
+      content: contentText,
+    });
+    const updatedData = response.data;
+    setComments(updatedData.comments);
+  }
   return (
     <>
       <h1 className="text-center text-white text-3xl font-bold">
@@ -49,6 +66,8 @@ export default function StoryPage() {
           Like Story
         </button>
       </section>
+      {/* comments story */}
+      <AddComment commentStory={commentStory} />
       <StoryComments comments={comments} />
     </>
   );
