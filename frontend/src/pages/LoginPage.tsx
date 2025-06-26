@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "../firebase"; // import your firebase app
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -6,7 +9,9 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const navigate = useNavigate();
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email || !password) {
       setError("Email and password are required.");
@@ -14,7 +19,18 @@ export default function LoginPage() {
     }
     setError("");
     setIsSubmitting(true);
-    setTimeout(() => setIsSubmitting(false), 1000);
+    try {
+      await signInWithEmailAndPassword(getAuth(app), email, password);
+      navigate("/stories");
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Login failed.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
