@@ -1,4 +1,4 @@
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router";
 import useUserAccount from "./hooks/useUserAccount";
 

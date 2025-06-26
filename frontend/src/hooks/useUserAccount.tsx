@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { User } from "firebase/auth";
 
 export default function useUserAccount() {
+  // type for typescript from firebase
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
