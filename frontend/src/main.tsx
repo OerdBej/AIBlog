@@ -5,21 +5,20 @@ import App from "./App.tsx";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+// Use environment variables for Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyDoQpDtDKlHFdRWU2PLzXfw_vKqAs8LNNk",
-  authDomain: "slowjournal-f60eb.firebaseapp.com",
-  projectId: "slowjournal-f60eb",
-  storageBucket: "slowjournal-f60eb.firebasestorage.app",
-  messagingSenderId: "1559019686",
-  appId: "1:1559019686:web:42b2f3f059e202d16ff467",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />

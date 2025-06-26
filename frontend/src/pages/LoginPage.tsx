@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "../firebase"; // import your firebase app
+import { app } from "../firebase";
+
+async function loginWithFirebase(email: string, password: string) {
+  return signInWithEmailAndPassword(getAuth(app), email, password);
+}
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -20,7 +24,7 @@ export default function LoginPage() {
     setError("");
     setIsSubmitting(true);
     try {
-      await signInWithEmailAndPassword(getAuth(app), email, password);
+      await loginWithFirebase(email, password);
       navigate("/stories");
     } catch (err) {
       if (err instanceof Error) {
