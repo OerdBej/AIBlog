@@ -28,9 +28,11 @@ export default function CreateAccount() {
   async function createAccount() {
     setIsSubmitting(true);
     try {
+      // user authenticate and to go stories
       await createUserWithEmailAndPassword(getAuth(app), email, password);
       navigate("/stories");
     } catch (err) {
+      console.error(err);
       if (err instanceof Error) {
         setError(err.message);
       } else {
