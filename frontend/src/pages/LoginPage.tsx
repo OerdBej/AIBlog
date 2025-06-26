@@ -14,38 +14,33 @@ export default function LoginPage() {
     }
     setError("");
     setIsSubmitting(true);
-    // Simulate login logic
     setTimeout(() => setIsSubmitting(false), 1000);
   }
 
   return (
     <form
-      className="flex flex-col gap-8 self-center w-full text-white lg:max-w-3xl my-8"
+      className="flex flex-col gap-6 self-center w-full text-white max-w-md my-12"
       onSubmit={handleSubmit}
     >
-      <label htmlFor="email" className="mb-2">
-        Email
-        <input
-          className="p-2 border-b-4 border-[#4FD1C5] block w-full mt-1 text-black rounded focus:outline-none focus:border-[#FF6500] focus:bg-orange-50 transition-colors duration-200"
-          type="email"
-          id="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label htmlFor="password" className="mb-2">
-        Password
-        <input
-          className="p-2 border-b-4 border-[#4FD1C5] block w-full mt-1 text-black rounded focus:outline-none focus:border-[#FF6500] focus:bg-orange-50 transition-colors duration-200"
-          type="password"
-          id="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      {error && <div className="text-red-500 mb-2">{error}</div>}
+      <input
+        className="bg-transparent border-b-2 border-[#4FD1C5] focus:border-[#FF6500] outline-none p-2 text-white placeholder-gray-400 transition-colors duration-200"
+        type="email"
+        id="email"
+        placeholder="Email"
+        value={email}
+        autoComplete="username"
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        className="bg-transparent border-b-2 border-[#4FD1C5] focus:border-[#FF6500] outline-none p-2 text-white placeholder-gray-400 transition-colors duration-200"
+        type="password"
+        id="password"
+        placeholder="Password"
+        value={password}
+        autoComplete="current-password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      {error && <div className="text-red-500 text-sm">{error}</div>}
       <button
         className={`px-4 py-2 rounded font-bold transition-colors duration-200 ${
           isSubmitting
