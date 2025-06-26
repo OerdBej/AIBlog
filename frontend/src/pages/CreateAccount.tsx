@@ -1,41 +1,56 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "../firebase";
 
-async function loginWithFirebase(email: string, password: string) {
-  // make req to the instance of firabase + getAuth to check
-  return signInWithEmailAndPassword(getAuth(app), email, password);
-}
-
-export default function LoginPage() {
+export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!email || !password) {
-      setError("Email and password are required.");
-      return;
+  function validateForm() {
+    if (!email || !password || !confirmPassword) {
+      setError("All fields are required.");
+      return false;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return false;
     }
     setError("");
+    return true;
+  }
+
+  async function createAccount() {
     setIsSubmitting(true);
     try {
-      await loginWithFirebase(email, password);
+      await createUserWithEmailAndPassword(getAuth(app), email, password);
       navigate("/stories");
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError("Login failed.");
+        setError("Account creation failed.");
       }
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (validateForm()) {
+      await createAccount();
+    }
+  }
+
+  function handleNavigateLogin(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    navigate("/login");
   }
 
   return (
@@ -58,8 +73,17 @@ export default function LoginPage() {
         id="password"
         placeholder="Password"
         value={password}
-        autoComplete="current-password"
+        autoComplete="new-password"
         onChange={(e) => setPassword(e.target.value)}
+      />
+      <input
+        className="bg-transparent border-b-2 border-[#4FD1C5] focus:border-[#FF6500] outline-none p-2 text-white placeholder-gray-400 transition-colors duration-200"
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        autoComplete="new-password"
+        onChange={(e) => setConfirmPassword(e.target.value)}
       />
       {error && <div className="text-red-500 text-sm">{error}</div>}
       <button
@@ -71,15 +95,16 @@ export default function LoginPage() {
         type="submit"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Logging in..." : "Login"}
+        {isSubmitting ? "Creating..." : "Create Account"}
       </button>
       <div className="text-center mt-4">
-        <Link
-          to="/new-account"
-          className="text-sm text-gray-500 hover:text-gray-800 transition-colors duration-200"
+        <a
+          href="/login"
+          className="text-sm text-gray-500 hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+          onClick={handleNavigateLogin}
         >
-          No account yet? Sign up here
-        </Link>
+          Have an account? Sign in here
+        </a>
       </div>
     </form>
   );

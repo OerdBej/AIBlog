@@ -6,6 +6,7 @@ import StoryListPage from "./pages/StoryListPage";
 import StoryPage from "./pages/StoryPage";
 import { storyLoader } from "./loaders/storyLoader";
 import LoginPage from "./pages/LoginPage";
+import CreateAccount from "./pages/CreateAccount";
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
       {
         path: "/login",
         element: <LoginPage />,
+      },
+      {
+        path: "/new-account",
+        element: <CreateAccount />,
       },
     ],
   },
