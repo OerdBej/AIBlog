@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import StoryListPage from "./pages/StoryListPage";
 import StoryPage from "./pages/StoryPage";
 import { storyLoader } from "./loaders/storyLoader";
+import LoginPage from "./pages/LoginPage";
 
 const routes = [
   {
@@ -25,6 +26,10 @@ const routes = [
         element: <StoryPage />,
 
         loader: storyLoader,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
       },
     ],
   },
