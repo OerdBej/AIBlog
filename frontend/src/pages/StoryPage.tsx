@@ -58,7 +58,7 @@ export default function StoryPage() {
         <p className="text-left text-[#FF6599]">
           {likes} {likes === 1 ? "Like" : "Likes"}
         </p>
-        {user && ( // <-- only show button if user is logged in
+        {user && (
           <button
             className="text-white border border-[#FF6599 px-4 py-2 rounded]"
             onClick={likeStory}
@@ -67,8 +67,13 @@ export default function StoryPage() {
           </button>
         )}
       </section>
-      {/* comments story */}
-      <AddComment commentStory={commentStory} />
+      {user ? (
+        <AddComment commentStory={commentStory} />
+      ) : (
+        <p className="text-white text-center mt-4">
+          Please log in to add a comment.
+        </p>
+      )}
       <StoryComments comments={comments} />
     </>
   );
