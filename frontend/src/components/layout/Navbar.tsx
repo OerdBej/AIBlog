@@ -1,6 +1,6 @@
 import { getAuth, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router";
-import useUserAccount from "./hooks/useUserAccount";
+import useUserAccount from "../../hooks/useUserAccount";
 
 export default function NavBar() {
   const { user, isLoading } = useUserAccount();

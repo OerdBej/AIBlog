@@ -6,7 +6,6 @@ interface Story {
   content: string[];
 }
 
-//props are objects so interface
 interface StoriesProps {
   stories: Story[];
 }

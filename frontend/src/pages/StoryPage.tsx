@@ -2,7 +2,7 @@ import { useLoaderData, useParams } from "react-router";
 import stories from "../data/content";
 import axios from "axios";
 import { useState } from "react";
-import StoryComments from "../StoryComments";
+import StoryComments from "../components/stories/StoryComments";
 import AddComment from "./AddComment";
 import useUserAccount from "../hooks/useUserAccount"; // <-- import the hook
 

@@ -1,4 +1,4 @@
-import StoriesList from "../StoriesList";
+import StoriesList from "../components/stories/StoriesList";
 import stories from "../data/content";
 
 const StoryListPage = () => {
