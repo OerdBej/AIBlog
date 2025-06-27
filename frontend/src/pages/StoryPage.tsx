@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import StoryComments from "../StoryComments";
 import AddComment from "./AddComment";
+import useUserAccount from "../hooks/useUserAccount"; // <-- import the hook
 
 interface Story {
   likes: number;
@@ -12,16 +13,14 @@ interface Story {
 
 export default function StoryPage() {
   const { name } = useParams();
-  // 🔴 loader hook from react router
   const { likes: firstLikes, comments: initialComments }: Story =
     useLoaderData();
-
   const [likes, setLikes] = useState(firstLikes);
   const [comments, setComments] = useState(initialComments);
-
   const story = stories.find((story) => story.name === name)!;
 
-  //req to server
+  const { user } = useUserAccount(); // <-- get user
+
   async function likeStory() {
     const response = await axios.post(`/api/stories/${name}/likes`);
     const updatedData = response.data;
@@ -59,12 +58,14 @@ export default function StoryPage() {
         <p className="text-left text-[#FF6599]">
           {likes} {likes === 1 ? "Like" : "Likes"}
         </p>
-        <button
-          className="text-white border border-[#FF6599 px-4 py-2 rounded]"
-          onClick={likeStory}
-        >
-          Like Story
-        </button>
+        {user && ( // <-- only show button if user is logged in
+          <button
+            className="text-white border border-[#FF6599 px-4 py-2 rounded]"
+            onClick={likeStory}
+          >
+            Like Story
+          </button>
+        )}
       </section>
       {/* comments story */}
       <AddComment commentStory={commentStory} />
