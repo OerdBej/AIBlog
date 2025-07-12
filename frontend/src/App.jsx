@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import Blog from "./pages/Blog";
 import Navbar from "./components/Navbar";
+import HeaderSection from "./components/HeaderSection";
 
 const App = () => {
   return (
