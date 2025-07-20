@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import Blog from "./pages/Blog";
+import NewsLetter from "./components/NewsLetter";
 
 const App = () => {
   return (
@@ -8,8 +9,9 @@ const App = () => {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<Blog />} />
         </Routes>
+        <NewsLetter />
       </div>
     </div>
   );
