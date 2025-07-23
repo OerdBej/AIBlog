@@ -11,7 +11,7 @@ const Navbar = () => {
         onClick={() => navigate("/")}
         src={assets.logo}
         alt="logo for the project"
-        className="w-6 h-6 sm:w-24 sm:h-24 cursor-pointer"
+        className="w-14.5 cursor-pointer"
       />
       <button
         onClick={() => navigate("/admin")}
