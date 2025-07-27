@@ -30,11 +30,17 @@ const Blog = () => {
       />
       <Navbar />
       {/* first section */}
-      <div>
-        <p>Published on {Moment(data.createdAt).format("MMM Do YYYY")}</p>
-        <h1>{data.title}</h1>
-        <h2>{data.subTitle}</h2>
-        <p>ob</p>
+      <div className="text-center mt-20 text-gray-600">
+        <p className="text-primary py-4 font-medium">
+          Published on {Moment(data.createdAt).format("MMM Do YYYY")}
+        </p>
+        <h1 className="text-2xl sm:text-5xl font-semibold max-w-2xl mx-auto text-gray-900">
+          {data.title}
+        </h1>
+        <h2 className="my-5 max-w-lg mx-auto">{data.subTitle}</h2>
+        <p className="inline-block py-1 px-4 rounded-full mb-6 border text-sm  border-primary/35 bg-purple-700/5 font-medium text-primary">
+          ob
+        </p>
       </div>
 
       {/* image */}
