@@ -11,6 +11,10 @@ const Blog = () => {
   const [data, setData] = useState(null);
   const [comments, setComments] = useState([]);
 
+  // form state data
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+
   const fetchBlogData = async () => {
     // if data is = to params clicked
     const data = blog_data.find((item) => item._id === id);
@@ -20,6 +24,11 @@ const Blog = () => {
   // assets
   const fetchComments = async () => {
     setComments(comments_data);
+  };
+
+  //add comment function
+  const addComment = async (e) => {
+    e.preventDefault();
   };
 
   //component loaded get data
@@ -62,7 +71,7 @@ const Blog = () => {
         {/* comments section */}
         <div className="mt-14 mb-10 max-w-3xl mx-auto">
           {/* total number of commemts when page loads */}
-          <p>Comments ( {comments.length})</p>
+          <p className="font-semibold mb-5">Comments ( {comments.length})</p>
           {/* comments for the display */}
           <div className="flex flex-col gap-4">
             {comments.map((item, index) => (
@@ -75,12 +84,42 @@ const Blog = () => {
                   <p className="font-medium"> {item.name}</p>
                 </div>
                 <p className="text-sm max-2-md ml-8">{item.content}</p>
-                <div className="absolute right-2 bottom-0.5 flex items-center gap-2 text-xs">
+                <div className="absolute right-2 bottom-0.8 flex items-center gap-2 text-xs">
                   {Moment(item.createdAt).fromNow()}
                 </div>
               </div>
             ))}
           </div>
+        </div>
+        {/* form box*/}
+        <div className="max-w-3xl mx-auto">
+          <p className="font-semibold mb-4">add comment</p>
+          <form
+            className="flex flex-col items-start gap-4 max-w-lg"
+            onSubmit={addComment}
+          >
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              placeholder="user name"
+              required
+              className="w-full p-2 border border-gray-300 rounded outline-none"
+            />
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="comment here"
+              className="w-full p-2 border border-gray-300 rounded outline-none h-48"
+              required
+            ></textarea>
+            <button
+              type="submit"
+              className="bg-primary text-white rounded p-2 px-8 hower:scale-102 transition-all cursor-pointer"
+            >
+              submit
+            </button>
+          </form>
         </div>
       </div>
 
