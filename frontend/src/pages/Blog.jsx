@@ -32,6 +32,7 @@ const Blog = () => {
       {/* first section */}
       <div className="text-center mt-20 text-gray-600">
         <p className="text-primary py-4 font-medium">
+          {/* 🔴 moment npm package */}
           Published on {Moment(data.createdAt).format("MMM Do YYYY")}
         </p>
         <h1 className="text-2xl sm:text-5xl font-semibold max-w-2xl mx-auto text-gray-900">
@@ -44,7 +45,11 @@ const Blog = () => {
       </div>
 
       {/* image */}
-      <div></div>
+      <div className="border-4 border-indigo-500/100 max-w-5xl md:mx-auto mx-5 my-10 mt-6">
+        <img src={data.image} alt="thumbnail images" />
+        {/* description of the blob text */}
+        <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+      </div>
 
       <h3>This is data</h3>
     </div>
