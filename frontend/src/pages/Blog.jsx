@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { assets, blog_data } from "../assets/assets";
+import { assets, blog_data, comments_data } from "../assets/assets";
 import Moment from "moment";
 import Navbar from "../components/Navbar";
 
@@ -9,6 +9,7 @@ const Blog = () => {
 
   //get all blog data
   const [data, setData] = useState(null);
+  const [comments, setComments] = useState([]);
 
   const fetchBlogData = async () => {
     // if data is = to params clicked
@@ -16,9 +17,15 @@ const Blog = () => {
     setData(data);
   };
 
+  // assets
+  const fetchComments = async () => {
+    setComments(comments_data);
+  };
+
   //component loaded get data
   useEffect(() => {
     fetchBlogData();
+    fetchComments();
   }, []);
 
   return data ? (
@@ -48,7 +55,15 @@ const Blog = () => {
       <div className="border-4 border-indigo-500/100 max-w-5xl md:mx-auto mx-5 my-10 mt-6">
         <img src={data.image} alt="thumbnail images" />
         {/* description of the blob text */}
-        <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+        <div
+          dangerouslySetInnerHTML={{ __html: data.description }}
+          className="rich-text max-w-3xl mx-auto"
+        ></div>
+        {/* comments section */}
+        <div className="mt-14 mb-10 max-w-3xl mx-auto">
+          {/* total number of commemts when page loads */}
+          <p>Comments ( {comments.length})</p>
+        </div>
       </div>
 
       <h3>This is data</h3>
