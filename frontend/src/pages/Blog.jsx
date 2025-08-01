@@ -4,6 +4,7 @@ import { assets, blog_data, comments_data } from "../assets/assets";
 import Moment from "moment";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Loading from "../components/Loading";
 
 const Blog = () => {
   const { id } = useParams();
@@ -142,7 +143,7 @@ const Blog = () => {
     </div>
   ) : (
     // ⭕️ later for the state Loading
-    <h3>Loading</h3>
+    <Loading />
   );
 };
 
