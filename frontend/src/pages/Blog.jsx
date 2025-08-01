@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { assets, blog_data, comments_data } from "../assets/assets";
 import Moment from "moment";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Blog = () => {
   const { id } = useParams();
@@ -61,7 +62,7 @@ const Blog = () => {
       </div>
 
       {/* image */}
-      <div className="border-4 border-indigo-500/100 max-w-5xl md:mx-auto mx-5 my-10 mt-6">
+      <div className=" max-w-5xl md:mx-auto mx-5 my-10 mt-6">
         <img src={data.image} alt="thumbnail images" />
         {/* description of the blob text */}
         <div
@@ -121,7 +122,21 @@ const Blog = () => {
             </button>
           </form>
         </div>
+        {/* social media icons */}
+        <div className="my-24 max-2-3xl mx-auto">
+          <p className="font-semibold my-4">
+            share this article on social media
+          </p>
+          {/* icons */}
+          <div className="flex">
+            <img src={assets.facebook_icon} alt="facebook icons" width={50} />
+            <img src={assets.twitter_icon} alt="twitter icons" width={50} />
+            <img src={assets.googleplus_icon} alt="google icons" width={50} />
+          </div>
+        </div>
+        {/* footer */}
       </div>
+      <Footer />
 
       <h3>This is data</h3>
     </div>
