@@ -15,14 +15,14 @@ const App = () => {
     <div>
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/blog/:id" element={<Blog />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/blog/:id' element={<Blog />} />
           {/* with child routes: //click admin -> open LayoutAdmin -> add the Dashboard - if the user is log in display it if not layout*/}
-          <Route path="/admin" element={false ? <LayoutAdmin /> : <Login />}>
+          <Route path='/admin' element={true ? <LayoutAdmin /> : <Login />}>
             <Route index element={<Dashboard />} />
-            <Route path="addBlog" element={AddBlog} />
-            <Route path="listBlog" element={BlogList} />
-            <Route path="comments" element={<Comments />} />
+            <Route path='addBlog' element={AddBlog} />
+            <Route path='listBlog' element={BlogList} />
+            <Route path='comments' element={<Comments />} />
           </Route>
         </Routes>
       </div>
