@@ -1,6 +1,7 @@
 import React from "react";
 import { assets } from "../../assets/assets";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import Sidebar from "../../components/admin/Sidebar";
 
 const LayoutAdmin = () => {
   const navigate = useNavigate();
@@ -23,6 +24,11 @@ const LayoutAdmin = () => {
         >
           Logout
         </button>
+      </div>
+
+      <div className="flex h-[calc(100vh - 70px)]">
+        <Sidebar />
+        <Outlet />
       </div>
     </>
   );
