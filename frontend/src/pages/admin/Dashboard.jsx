@@ -60,6 +60,31 @@ const Dashboard = () => {
           <img src={assets.dashboard_icon_4} alt='' />
           <p>Latest blog</p>
         </div>
+        {/* table headings */}
+        <div className='relative max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-white'>
+          <table className='w-full text-sm text-gray-600'>
+            <thead className='text-xs text-gray-700 text-left uppercase'>
+              <tr>
+                <th scope='col' className='px-2 py-4 xl:px-6'>
+                  #
+                </th>
+                <th scope='col' className='px-2 py-4'>
+                  Blog Title
+                </th>
+                <th scope='col' className='px-2 py-4 max-sm:hidden'>
+                  Date
+                </th>
+                <th scope='col' className='px-2 py-4 max-sm:hidden'>
+                  Status
+                </th>
+                <th scope='col' className='px-2 py-4'>
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            {/* table body of the data */}
+          </table>
+        </div>
       </div>
     </div>
   );
