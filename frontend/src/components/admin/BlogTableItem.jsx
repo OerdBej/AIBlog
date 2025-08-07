@@ -1,7 +1,7 @@
 import React from "react";
 import { assets } from "../../assets/assets";
 
-const BlogTableItem = ({ blog, fetchBlog, index }) => {
+const BlogTableItem = ({ blog, index }) => {
   const { title, createdAt } = blog;
 
   const BlogDate = new Date(createdAt);
@@ -23,8 +23,7 @@ const BlogTableItem = ({ blog, fetchBlog, index }) => {
       </td>
       <td className='px-2 py-4 flex text-xs gap-3'>
         <button className='border px-2 py-0.5 mt-1 rounded cursor-pointer'>
-          {" "}
-          {blog.isPublished ? "Ublished" : "Published"}
+          {blog.isPublished ? "Unblished" : "Published"}
         </button>
         <img
           src={assets.cross_icon}
