@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { assets } from "../../assets/assets";
+import Quill from "quill";
 
 const AddBlog = () => {
+  // reference variable for Quill documentation
+
+  const editorRef = useRef(null);
+  const quillRef = useRef(null);
+
   const [image, setImage] = useState(false);
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
@@ -56,7 +62,9 @@ const AddBlog = () => {
           value={subtitle}
         />
         <p className='mt-4'>Blog Description</p>
+
         <div className='max-w-lg h-74 pb-16 sm:pb-10 pt-2 relative'>
+          <div ref={editorRef}></div>
           <button
             className='absolute bottom-1 right-2 ml-2 text-xs text-white bg-black/70 px-4 py-1.5 rounded hover:underline cursor-pointer'
             type='button'
