@@ -12,6 +12,7 @@ const AddBlog = () => {
     e.preventDefault();
   };
 
+  const generateContent = async () => {};
   return (
     <form
       onSubmit={submitHandler}
@@ -25,16 +26,45 @@ const AddBlog = () => {
             src={!image ? assets.upload_area : URL.createObjectURL(image)}
             alt=''
           />
+          <input
+            // selecting the first image from input field
+            onChange={(e) => setImage(e.target.files[0])}
+            type='file'
+            id='image'
+            required
+            hidden
+            className='mt-2 h-16 rounded cursor-pointer'
+          />
         </label>
+        {/* text */}
+        <p className='mt-4'>Blog title</p>
         <input
-          // selecting the first image from input field
-          onChange={(e) => setImage(e.target.files[0])}
-          type='file'
-          id='image'
+          type='text'
+          placeholder='type your text here'
           required
-          hidden
-          className='mt-2 h-16 rounded cursor-pointer'
+          className='w-full max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded'
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
         />
+        <p className='mt-4'>Subtitle </p>
+        <input
+          type='text'
+          placeholder='type your text here'
+          required
+          className='w-full max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded'
+          onChange={(e) => setSubtitle(e.target.value)}
+          value={subtitle}
+        />
+        <p className='mt-4'>Blog Description</p>
+        <div className='max-w-lg h-74 pb-16 sm:pb-10 pt-2 relative'>
+          <button
+            className='absolute bottom-1 right-2 ml-2 text-xs text-white bg-black/70 px-4 py-1.5 rounded hover:underline cursor-pointer'
+            type='button'
+            onClick={generateContent}
+          >
+            AI Blog
+          </button>
+        </div>
       </div>
     </form>
   );
