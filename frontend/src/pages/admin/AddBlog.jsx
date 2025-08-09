@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { assets } from "../../assets/assets";
 import Quill from "quill";
 
@@ -17,6 +17,13 @@ const AddBlog = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
   };
+
+  // quill
+  useEffect(() => {
+    if (!quillRef.current && editorRef.current) {
+      quillRef.current = new Quill(editorRef.current, { theme: "snow" });
+    }
+  }, []);
 
   const generateContent = async () => {};
   return (
@@ -64,6 +71,7 @@ const AddBlog = () => {
         <p className='mt-4'>Blog Description</p>
 
         <div className='max-w-lg h-74 pb-16 sm:pb-10 pt-2 relative'>
+          {/* to enter the text rich text format */}
           <div ref={editorRef}></div>
           <button
             className='absolute bottom-1 right-2 ml-2 text-xs text-white bg-black/70 px-4 py-1.5 rounded hover:underline cursor-pointer'
