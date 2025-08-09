@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { assets } from "../../assets/assets";
+import { assets, blogCategories } from "../../assets/assets";
 import Quill from "quill";
 
 const AddBlog = () => {
@@ -81,6 +81,20 @@ const AddBlog = () => {
             AI Blog
           </button>
         </div>
+        {/* next for description */}
+        <p className='mt-4'>Blog Category</p>
+        <select onChange={(e) => setCategory(e.target.value)} name='category'>
+          <option value='mt-2 mx-3 py-2 border text-gray-500 border-gray-300 outline-none rounded'>
+            Select Category
+          </option>
+          {blogCategories.map((item, index) => {
+            return (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            );
+          })}
+        </select>
       </div>
     </form>
   );
