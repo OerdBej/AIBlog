@@ -1,5 +1,4 @@
-import { JsonWebTokenError } from "jsonwebtoken";
-
+import jwt from "jsonwebtoken";
 // get the data AND verify email/pass so we can get auth token
 export const adminLogin = async (req, res) => {
   try {
