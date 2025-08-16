@@ -26,3 +26,6 @@ build/
 
 # Coverage
 coverage/
+
+# Personal notes
+ob.md
