@@ -1,5 +1,7 @@
 import fs from "fs";
 import imagekit from "../configs/imageKit.js";
+
+// in order to add the new data
 export const addBlog = async (req, res) => {
   try {
     const { title, subTitle, description, category, isPublished } = JSON.parse(
