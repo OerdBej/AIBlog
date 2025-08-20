@@ -4,6 +4,7 @@ const app = express();
 import cors from "cors";
 import connectDb from "./configs/db.js";
 import adminRouter from "./routes/adminRoutes.js";
+import blogRouter from "./routes/blogRoutes.js";
 
 // middlewares
 app.use(cors());
@@ -15,6 +16,7 @@ await connectDb();
 // routes
 app.get("/", (req, res) => res.send("its alive"));
 app.use("/api/admin", adminRouter);
+app.use("/api/blog", blogRouter);
 
 // run server port
 const PORT = process.env.PORT || 3000;
