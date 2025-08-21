@@ -1,10 +1,12 @@
-import express from "express";
-import "dotenv/config";
-const app = express();
 import cors from "cors";
+import "dotenv/config";
 import connectDb from "./configs/db.js";
 import adminRouter from "./routes/adminRoutes.js";
 import blogRouter from "./routes/blogRoutes.js";
+
+// server
+import express from "express";
+const app = express();
 
 // middlewares
 app.use(cors());
