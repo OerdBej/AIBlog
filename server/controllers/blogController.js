@@ -1,6 +1,6 @@
-import fs from "fs";
-import imagekit from "../configs/imageKit.js";
-import Blog from "../models/Blog.js";
+import fs from 'fs';
+import imagekit from '../configs/imageKit.js';
+import Blog from '../models/Blog.js';
 
 // in order to add the new data from our admin dashboard we send all the data
 export const addBlog = async (req, res) => {
@@ -12,7 +12,7 @@ export const addBlog = async (req, res) => {
     const imageFile = req.file;
 
     if (!title || !description || !category || !imageFile) {
-      return res.json({ success: false, message: "Missing fields" });
+      return res.json({ success: false, message: 'Missing fields' });
     }
 
     // upload the image after converting it in buffer format => mandatory from imageKit documenation
@@ -22,7 +22,7 @@ export const addBlog = async (req, res) => {
     const response = await imagekit.upload({
       file: fileBuffer,
       fileName: imageFile.originalname,
-      folder: "/blogs",
+      folder: '/blogs',
     });
 
     // optimization through imageKit => store it to a variable
@@ -30,9 +30,9 @@ export const addBlog = async (req, res) => {
     const optimizedImageUrl = imagekit.url({
       path: response.filePath,
       transformation: [
-        { quality: "auto" },
-        { format: "webp" },
-        { width: "1280" },
+        { quality: 'auto' },
+        { format: 'webp' },
+        { width: '1280' },
       ],
     });
 
@@ -46,7 +46,7 @@ export const addBlog = async (req, res) => {
       image,
       isPublished,
     });
-    res.json({ success: true, message: "Blog added successfully" });
+    res.json({ success: true, message: 'Blog added successfully' });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
@@ -58,7 +58,22 @@ export const getAllBlogs = async (req, res) => {
   try {
     //its its true will return and store
     const blogs = await Blog.find({ isPublished: true });
-    res.json({ success: true, message: "Blog added successfully" });
+    res.json({ success: true, message: 'Blog added successfully' });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//getBlogId
+
+export const getBlogById = async (req, res) => {
+  try {
+    const { blogId } = req.parse;
+    const blog = await Blog.findById(blogId);
+    if (!blog) {
+      res.json({ success: true, message: 'Blog not found ' });
+    }
+    res.json({ success: true, blog });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
