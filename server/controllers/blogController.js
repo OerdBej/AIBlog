@@ -65,7 +65,6 @@ export const getAllBlogs = async (req, res) => {
 };
 
 //getBlogId
-
 export const getBlogById = async (req, res) => {
   try {
     const { blogId } = req.parse;
@@ -74,6 +73,18 @@ export const getBlogById = async (req, res) => {
       res.json({ success: true, message: 'Blog not found ' });
     }
     res.json({ success: true, blog });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//delete blog
+export const deleteBlogById = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const blog = await Blog.findById(id);
+    await Blog.findOneAndDelete(id);
+    res.json({ success: true, message: 'Blog Deleted' });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
