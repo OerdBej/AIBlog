@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 // get the data AND verify email/pass so we can get auth token
 export const adminLogin = async (req, res) => {
   try {
@@ -7,7 +7,7 @@ export const adminLogin = async (req, res) => {
       email !== process.env.ADMIN_EMAIL ||
       password !== process.env.ADMIN_PASSWORD
     ) {
-      return res.json({ success: false, message: "invalid credentials" });
+      return res.json({ success: false, message: 'invalid credentials' });
     }
     //send the token to response
     const token = jwt.sign({ email }, process.env.JWT_SECRET);
