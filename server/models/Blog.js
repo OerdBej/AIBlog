@@ -1,4 +1,4 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 
 const blogSchema = new mongoose.Schema(
   {
@@ -8,7 +8,7 @@ const blogSchema = new mongoose.Schema(
     category: { type: String, required: true },
     email: {
       type: String,
-      required: true, // Set to false if email is optional
+      required: true,
       match: [
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         'Please provide a valid email address',
