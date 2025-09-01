@@ -7,14 +7,17 @@ export const addBlog = async (req, res) => {
     const { title, subTitle, description, category, isPublished } = JSON.parse(
       req.body.blog
     );
+    // this comes from Multer middleware
     const imageFile = req.file;
 
     if (!title || !description || !category || !imageFile) {
       return res.json({ success: false, message: 'Missing fields' });
     }
 
+    //  Multer middleware: after buffer upload to ImageKit
     const fileBuffer = fs.readFileSync(imageFile.path);
 
+    // uploading and optimizing
     const response = await imagekit.upload({
       file: fileBuffer,
       fileName: imageFile.originalname,
@@ -30,7 +33,10 @@ export const addBlog = async (req, res) => {
       ],
     });
 
+    // image url
     const image = optimizedImageUrl;
+
+    // create that Blog from the model
     await Blog.create({
       title,
       subTitle,
@@ -45,8 +51,7 @@ export const addBlog = async (req, res) => {
   }
 };
 
-// to get all the blogs list
-
+// to get all the blogs list - when its published return all
 export const getAllBlogs = async (req, res) => {
   try {
     //its its true will return and store
@@ -78,6 +83,19 @@ export const deleteBlogById = async (req, res) => {
     const blog = await Blog.findById(id);
     await Blog.findOneAndDelete(id);
     res.json({ success: true, message: 'Blog Deleted' });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// toggle published from true / false
+export const togglePublish = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const blog = await Blog.findById(id);
+    blog.isPublished = !blog.isPublished;
+    await blog.save();
+    res.json({ success: true, message: 'Blog status updated' });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
