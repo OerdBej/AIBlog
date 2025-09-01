@@ -65,7 +65,7 @@ export const getAllBlogs = async (req, res) => {
 //getBlogId
 export const getBlogById = async (req, res) => {
   try {
-    const { blogId } = req.parse;
+    const { blogId } = req.params;
     const blog = await Blog.findById(blogId);
     if (!blog) {
       res.json({ success: true, message: 'Blog not found ' });
@@ -96,6 +96,17 @@ export const togglePublish = async (req, res) => {
     blog.isPublished = !blog.isPublished;
     await blog.save();
     res.json({ success: true, message: 'Blog status updated' });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// add the comment to the blog
+export const addComment = async (req, res) => {
+  try {
+    const { blog, name, content } = req.body;
+    //comment it from model
+    await
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
