@@ -101,11 +101,26 @@ export const togglePublish = async (req, res) => {
   }
 };
 
-// add the comment to the blog from user
+// comment Schema to db with false by default, approved for publish
 export const addComment = async (req, res) => {
   try {
+    await Comment.create({ blog, name, content });
     const { blog, name, content } = req.body;
-    //comment it from model
+    res.json({ success: true, message: 'A comment added for review' });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// comment data for individual blogs with sorting
+export const getBlogComments = async (req, res) => {
+  try {
+    const { blogId } = req.body;
+    const comments = await Comment.find({
+      blog: blogId,
+      isApproved: true,
+    }).sort({ createdAt: -1 });
+    res.json({ success: true, comments });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
