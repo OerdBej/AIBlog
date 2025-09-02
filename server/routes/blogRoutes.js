@@ -15,6 +15,7 @@ const blogRouter = express.Router();
 blogRouter.post('/add', upload.single('image'), auth, addBlog);
 blogRouter.get('/all', getAllBlogs);
 blogRouter.get('/:blogId', getBlogById);
+// only admins can do it => so we protect it with AUTH
 blogRouter.post('/delete', auth, deleteBlogById);
 blogRouter.post('/toggle-publish', auth, togglePublish);
 

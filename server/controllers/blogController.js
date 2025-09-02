@@ -56,7 +56,7 @@ export const getAllBlogs = async (req, res) => {
   try {
     //its its true will return and store
     const blogs = await Blog.find({ isPublished: true });
-    res.json({ success: true, message: 'Blog added successfully' });
+    res.json({ success: true, blogs });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
@@ -101,12 +101,11 @@ export const togglePublish = async (req, res) => {
   }
 };
 
-// add the comment to the blog
+// add the comment to the blog from user
 export const addComment = async (req, res) => {
   try {
     const { blog, name, content } = req.body;
     //comment it from model
-    await
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
