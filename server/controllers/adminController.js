@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import Blog from '../models/Blog.js';
 import Comment from '../models/Comment.js';
+import { Component } from 'react';
 
 // get the data AND verify email/pass so we can get auth token
 export const adminLogin = async (req, res) => {
@@ -38,6 +39,26 @@ export const getAllComments = async (req, res) => {
       .populate('blog')
       .sort({ createdAt: -1 });
     res.json({ success: true, comments });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const getDashboard = async (req, res) => {
+  try {
+    //find recent blog
+    const recentBlogs = await Blog.find({}).sort({ createdAt: -1 }).limit(5);
+    //get total number of blogs
+    const blogs = await Blog.countDocuments();
+    const comments = await Component.countDocuments();
+    const drafts = await Blog.countDocuments({ isPublished: false });
+    const dashboardData = {
+      blogs,
+      comments,
+      drafts,
+      recentBlogs,
+    };
+    res.json({ success: true, dashboardData });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
