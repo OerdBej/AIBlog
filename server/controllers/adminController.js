@@ -63,3 +63,25 @@ export const getDashboard = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+//admin delete comment by ID
+export const deleteCommentsById = async (req, res) => {
+  try {
+    const { id } = req.body;
+    await Comment.findByIdAndDelete(id);
+    res.json({ success: true, message: 'Comment deleted' });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// approve the commit by ID
+export const approveCommentById = async (req, res) => {
+  try {
+    const { id } = req.body;
+    await Comment.findByIdAndUpdate(id, { isApproved: true });
+    res.json({ success: true, message: 'Comment approved' });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
